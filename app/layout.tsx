@@ -1,5 +1,6 @@
 import { cn } from '@/lib/utils';
 import Navbar from '@/components/nav';
+import Provider from '@/components/provider';
 
 import '@/styles/globals.css';
 
@@ -16,8 +17,10 @@ export const metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: {
   children: React.ReactNode;
+  modal: React.ReactNode;
 }) {
   return (
     <html lang='en' className='light bg-white text-slate-900 antialiased'>
@@ -27,11 +30,14 @@ export default function RootLayout({
           inter.className
         )}
       >
-        <Navbar />
-        <div className='container mx-auto h-full max-w-7xl pt-12'>
-          {children}
-        </div>
-        <Toaster />
+        <Provider>
+          <Navbar />
+          {modal}
+          <div className='container mx-auto h-full max-w-7xl pt-12'>
+            {children}
+          </div>
+          <Toaster />
+        </Provider>
       </body>
     </html>
   );
